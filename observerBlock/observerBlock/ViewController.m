@@ -65,6 +65,7 @@ static void PrintDescription(NSString * name, NSObject* obj)
     // Do any additional setup after loading the view, typically from a nib.
     NSLog(@"TEST GIT");
     NSLog(@"TEST2 GIT");
+    NSLog(@"test")
     anything = [[People alloc] init];
     x = [[People alloc] init];
     y = [[People alloc] init];
