@@ -65,7 +65,7 @@ static void PrintDescription(NSString * name, NSObject* obj)
     // Do any additional setup after loading the view, typically from a nib.
     NSLog(@"TEST GIT");
     NSLog(@"TEST2 GIT");
-    NSLog(@"test")
+    NSLog(@"test");
     anything = [[People alloc] init];
     x = [[People alloc] init];
     y = [[People alloc] init];
@@ -73,12 +73,16 @@ static void PrintDescription(NSString * name, NSObject* obj)
     control = [[People alloc] init];
     
     [x addObserver:anything forKeyPath:@"name" options:0 context:NULL];
-    [y addObserver:anything forKeyPath:@"age" options:0 context:NULL];
+//    [y addObserver:anything forKeyPath:@"age" options:0 context:NULL];
+//    
+//    [xy addObserver:anything forKeyPath:@"name" options:0 context:NULL];
+//    [xy addObserver:anything forKeyPath:@"age" options:0 context:NULL];
     
-    [xy addObserver:anything forKeyPath:@"name" options:0 context:NULL];
-    [xy addObserver:anything forKeyPath:@"age" options:0 context:NULL];
+    [x sq_addObserver:self forKeyPath:@"age" options:NSKeyValueObservingOptionNew context:NULL changeCallBack:^(NSString *keyPath, id object, NSDictionary *change, void *context) {
+        NSLog(@"block keyPath == %@",keyPath);
+    }];
     
-    [x sq_addObserverHandlerForKeyPath:@"age" options:NSKeyValueObservingOptionNew context:NULL changeCallBack:^(NSString *keyPath, id object, NSDictionary *change, void *context) {
+    [x sq_addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew context:NULL changeCallBack:^(NSString *keyPath, id object, NSDictionary *change, void *context) {
         NSLog(@"block keyPath == %@",keyPath);
     }];
     
@@ -97,11 +101,17 @@ static void PrintDescription(NSString * name, NSObject* obj)
                                                            @selector(setName:))));
     
     x.age = @"22";
+    x.name = @"sq";
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    NSLog(@"======================test");
 }
 
 @end

@@ -9,22 +9,59 @@
 #import "NSObject+observer.h"
 #import <objc/runtime.h>
 
-#define CHANGE_CALLBACK  @"SQChangeCallBack"
-
+#define CHANGE_CALLBACK  @"changeCallBack"
+#define KEYPATHS @"keypaths"
+#define KEYPATH_DICITIONARY @"keypath_dictionary"
 
 @implementation NSObject (observer)
 
--(void)sq_addObserverHandlerForKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context changeCallBack:(observerChangeCallBack)changeCallBack{
-    [self addObserver:self forKeyPath:keyPath options:options context:context];
-    objc_setAssociatedObject(self, CHANGE_CALLBACK, changeCallBack,  OBJC_ASSOCIATION_COPY_NONATOMIC);
+static void MethodSwizzle(Class c, SEL origSEL, SEL overrideSEL)
+{
+    
+    Method origMethod = class_getInstanceMethod(c, origSEL);
+    
+    Method overrideMethod = class_getInstanceMethod(c, overrideSEL);
+
+    method_exchangeImplementations(origMethod, overrideMethod);
+    
     
 }
 
-
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-          observerChangeCallBack callback =  (observerChangeCallBack)objc_getAssociatedObject(self, CHANGE_CALLBACK);
-            if (callback) {
-               callback(keyPath,object,change,context);
-            }
++(void)load{
+    
+    MethodSwizzle([self class], @selector(sq_observeValueForKeyPath: ofObject: change:context:), @selector(observeValueForKeyPath: ofObject: change: context:));
 }
+
+-(void)sq_addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context changeCallBack:(observerChangeCallBack)changeCallBack{
+    
+    [self addObserver:observer forKeyPath:keyPath options:options context:context];
+    
+    NSMutableDictionary *keypathDictionary = objc_getAssociatedObject(observer, KEYPATH_DICITIONARY);
+    if (!keypathDictionary) {
+        keypathDictionary = [NSMutableDictionary dictionary];
+        objc_setAssociatedObject(observer, KEYPATH_DICITIONARY, keypathDictionary, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    [keypathDictionary setObject:changeCallBack forKey:keyPath];
+    
+    
+}
+
+- (void)sq_observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    
+    NSMutableDictionary *keypathDictionary = (NSMutableDictionary*)objc_getAssociatedObject(self, KEYPATH_DICITIONARY);
+    
+    if ([keypathDictionary objectForKey:keyPath]) {
+        
+      observerChangeCallBack callback =  (observerChangeCallBack)[keypathDictionary objectForKey:keyPath];
+      
+      callback(keyPath,object,change,context);
+       
+        
+    }else if([self respondsToSelector:@selector(observeValueForKeyPath: ofObject: change: context:)]){
+        
+    }
+    
+    
+}
+
 @end

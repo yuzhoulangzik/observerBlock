@@ -12,5 +12,7 @@ typedef void(^observerChangeCallBack)(NSString *keyPath,
                                       NSDictionary *change,
                                       void * context);
 @interface NSObject (observer)
--(void)sq_addObserverHandlerForKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context changeCallBack:(observerChangeCallBack)changeCallBack;
+
+-(void)sq_addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context changeCallBack:(observerChangeCallBack)changeCallBack;
+
 @end

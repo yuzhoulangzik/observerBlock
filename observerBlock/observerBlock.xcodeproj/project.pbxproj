@@ -14,8 +14,8 @@
 		1B5DE81A1B3848C70031CCF5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B5DE8191B3848C70031CCF5 /* Images.xcassets */; };
 		1B5DE81D1B3848C70031CCF5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B5DE81B1B3848C70031CCF5 /* LaunchScreen.xib */; };
 		1B5DE8291B3848C70031CCF5 /* observerBlockTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5DE8281B3848C70031CCF5 /* observerBlockTests.m */; };
-		1B5DE8361B3848FE0031CCF5 /* NSObject+observer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5DE8331B3848FE0031CCF5 /* NSObject+observer.m */; };
 		1B5DE8371B3848FE0031CCF5 /* People.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5DE8351B3848FE0031CCF5 /* People.m */; };
+		1B5DE83A1B400E470031CCF5 /* NSObject+observer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5DE8391B400E470031CCF5 /* NSObject+observer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,10 +42,10 @@
 		1B5DE8221B3848C70031CCF5 /* observerBlockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = observerBlockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B5DE8271B3848C70031CCF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B5DE8281B3848C70031CCF5 /* observerBlockTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = observerBlockTests.m; sourceTree = "<group>"; };
-		1B5DE8321B3848FE0031CCF5 /* NSObject+observer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+observer.h"; sourceTree = "<group>"; };
-		1B5DE8331B3848FE0031CCF5 /* NSObject+observer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+observer.m"; sourceTree = "<group>"; };
 		1B5DE8341B3848FE0031CCF5 /* People.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = People.h; sourceTree = "<group>"; };
 		1B5DE8351B3848FE0031CCF5 /* People.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = People.m; sourceTree = "<group>"; };
+		1B5DE8381B400E470031CCF5 /* NSObject+observer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+observer.h"; sourceTree = "<group>"; };
+		1B5DE8391B400E470031CCF5 /* NSObject+observer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+observer.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,13 +87,13 @@
 		1B5DE80B1B3848C70031CCF5 /* observerBlock */ = {
 			isa = PBXGroup;
 			children = (
+				1B5DE8381B400E470031CCF5 /* NSObject+observer.h */,
+				1B5DE8391B400E470031CCF5 /* NSObject+observer.m */,
 				1B5DE8101B3848C70031CCF5 /* AppDelegate.h */,
 				1B5DE8111B3848C70031CCF5 /* AppDelegate.m */,
 				1B5DE8131B3848C70031CCF5 /* ViewController.h */,
 				1B5DE8141B3848C70031CCF5 /* ViewController.m */,
 				1B5DE8161B3848C70031CCF5 /* Main.storyboard */,
-				1B5DE8321B3848FE0031CCF5 /* NSObject+observer.h */,
-				1B5DE8331B3848FE0031CCF5 /* NSObject+observer.m */,
 				1B5DE8341B3848FE0031CCF5 /* People.h */,
 				1B5DE8351B3848FE0031CCF5 /* People.m */,
 				1B5DE8191B3848C70031CCF5 /* Images.xcassets */,
@@ -230,8 +230,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B5DE8151B3848C70031CCF5 /* ViewController.m in Sources */,
-				1B5DE8361B3848FE0031CCF5 /* NSObject+observer.m in Sources */,
 				1B5DE8371B3848FE0031CCF5 /* People.m in Sources */,
+				1B5DE83A1B400E470031CCF5 /* NSObject+observer.m in Sources */,
 				1B5DE8121B3848C70031CCF5 /* AppDelegate.m in Sources */,
 				1B5DE80F1B3848C70031CCF5 /* main.m in Sources */,
 			);
